@@ -9,8 +9,15 @@ def getDate(combinedWeatherInfo):
     return date
 
 
+def getTemps(combinedWeatherInfo):
+    strings = combinedWeatherInfo.split(' ')
+    T_max = strings[0]
+    T_min = strings[2]
+    return T_max,T_min
+
 week1 = weerplaza[1]
 combinedWeatherInfo = week1[1]
 
 
 date = getDate(combinedWeatherInfo[0])
+T_max,T_min = getTemps(combinedWeatherInfo[2])
