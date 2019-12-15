@@ -18,7 +18,6 @@ def add(weatherForT):
     }
 
     cursor.execute(add_positionlog,data_position)
-
     conn.commit()
     cursor.close()
     conn.close()
