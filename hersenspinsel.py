@@ -1,19 +1,14 @@
 import pandas as pd
-import numpy as np
+import addDB
 
 #Makkelijk te scrapen
 weerplaza = pd.read_html('https://www.weerplaza.nl/nederland/delfzijl/8570/')
 print(weerplaza[1][8])
 
-
-#Deze is een motherfucker
-#yahoo = pd.read_html('https://weather.com/weather/tenday/l/fa52f9623f642373090acc26649060007bf682b7a41c7c99e2d3c1d2aba9c7cc')
-
+weerDezeWeek = weerplaza[1]
+weerVolgendeWeek = weerplaza[9]
 
 
-#buienradar = pd.read_html('https://www.buienradar.nl/weer/delfzijl/nl/2757340/14daagse')
-
-#Veertien daagse voorspelling
 
 
 #KNMI DATA
