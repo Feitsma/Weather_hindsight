@@ -1,26 +1,24 @@
 import mysql.connector
 import dbsettings
 
-conn = mysql.connector.connect(user= dbsettings.user, password = dbsettings.password, database=dbsettings.database, host=dbsettings.host)
-cursor = conn.cursor()
 
-weatherForT = 't1'
 
-def add(weatherForT):
-    add_positionlog = ("INSERT INTO " + weatherForT + " (DateTime,T_max,T_min,prec_prob,mm,wind) VALUES (%(DateTime)s, %(T_max)s, %(T_min)s, %(prec_prob)s,%(mm)s,%(wind)s)")
+def add(table,day,T_max,T_min,prec_prob,mm,wind,prediction_in_days):
+    conn = mysql.connector.connect(user=dbsettings.user, password=dbsettings.password, database=dbsettings.database,
+                                   host=dbsettings.host)
+    cursor = conn.cursor()
+    add_positionlog = ("INSERT INTO " + table + " (DateTime,T_max,T_min,prec_prob,mm,wind,prediction_in_days) VALUES (%(DateTime)s, %(T_max)s, %(T_min)s, %(prec_prob)s,%(mm)s,%(wind)s,%(prediction_in_days)s)")
     data_position = {
-    'DateTime': '3',
-    'T_max': '50000',
-    'T_min': '1',
-    'prec_prob': '3',
-    'mm': '5',
-    'wind': '6',
+    'DateTime': day,
+    'T_max': T_max,
+    'T_min': T_min,
+    'prec_prob': prec_prob,
+    'mm': mm,
+    'wind': wind,
+    'prediction_in_days': prediction_in_days,
     }
 
     cursor.execute(add_positionlog,data_position)
     conn.commit()
     cursor.close()
     conn.close()
-
-
-add('t1')
