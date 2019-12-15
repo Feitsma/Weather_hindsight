@@ -20,6 +20,6 @@ df = knmi.get_day_data_dataframe(stations=[280])
 #df = df.rename(columns=df.legend)
 print(df)
 variables = knmi.variables
-min_temp = df['TN'].iloc[-1]/10 #min. temp
+min_temp = df['TN'].iloc[-1]/10 #min. temp tijdens laatste entry (moet gisteren zijn)
 max_temp = df['TX'].iloc[-1]/10 #max. temp
 rain = df['RH'].iloc[-1]/10 #rain
