@@ -1,7 +1,11 @@
+"""
+Scrapes weerplaze.nl for the location Eelde and retrieves the prediction for 14 days.
+The predictions are stored in a database to preform a quality check with the actual weather
+"""
+
 import pandas as pd
 import datetime
 import addDB
-
 
 weerplaza = pd.read_html('https://www.weerplaza.nl/nederland/eelde-paterswolde/8967/')
 
