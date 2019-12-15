@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
 
-
 #Makkelijk te scrapen
 weerplaza = pd.read_html('https://www.weerplaza.nl/nederland/delfzijl/8570/')
 print(weerplaza[1][8])
