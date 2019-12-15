@@ -1,11 +1,14 @@
 import pandas as pd
 import datetime
+import addDB
+
 
 weerplaza = pd.read_html('https://www.weerplaza.nl/nederland/eelde-paterswolde/8967/')
 
 def getDate(combinedWeatherInfo):
     strings = combinedWeatherInfo.split(' ')
     date = strings[-1] + '-' + str(datetime.datetime.now().year)
+    date = datetime.datetime.strptime(date, '%d-%m-%Y')
     return date
 
 
@@ -34,12 +37,29 @@ def getWind(combinedWeatherInfo):
     return windForce
 
 
-week1 = weerplaza[1]
-combinedWeatherInfo = week1[1]
+def loopThroughDays(weatherdata,prediction_in_days):
+
+    for day in [0,2,4,6,8,10,12]:
+        weatheroftheday = weatherdata[day]
+
+        date = getDate(weatheroftheday[0])
+        T_max,T_min = getTemps(weatheroftheday[2])
+        prec_prob = getPrec_prob(weatheroftheday[3])
+        rain = getRain(weatheroftheday[3])
+        windForce = getWind(weatheroftheday[4])
+
+        addDB.add('prediction', date, T_max, T_min, prec_prob, rain, windForce,prediction_in_days)
+
+        prediction_in_days = prediction_in_days + 1
+
+#Prediction for x days in advance
+prediction_in_days = 1
+#Week1
+loopThroughDays(weerplaza[1],prediction_in_days)
+
+#Prediction for x days in advance
+prediction_in_days = 8
+#Week2
+loopThroughDays(weerplaza[9],prediction_in_days)
 
 
-date = getDate(combinedWeatherInfo[0])
-T_max,T_min = getTemps(combinedWeatherInfo[2])
-prec_prob = getPrec_prob(combinedWeatherInfo[3])
-rain = getRain(combinedWeatherInfo[3])
-windForce = getWind(combinedWeatherInfo[4])
