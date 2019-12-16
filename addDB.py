@@ -27,7 +27,7 @@ def add_data_yesterday(date_yesterday, max_temp, min_temp, rain, Beaufort, wind_
     conn = mysql.connector.connect(user=dbsettings.user, password=dbsettings.password, database=dbsettings.database,
                                    host=dbsettings.host)
     cursor = conn.cursor()
-    add_positionlog = ("INSERT INTO t0 (Date,T_max,T_min,mm,wind,wind_direction) VALUES (%(Date)s, %(T_max)s, %(T_min)s,%(mm)s,%(wind)s, %(wind_direction)s)")
+    add_positionlog = ("INSERT INTO t (Date,T_max,T_min,mm,wind,wind_direction) VALUES (%(Date)s, %(T_max)s, %(T_min)s,%(mm)s,%(wind)s, %(wind_direction)s)")
     data_position = {
         'Date': date_yesterday,
         'T_max': max_temp,
