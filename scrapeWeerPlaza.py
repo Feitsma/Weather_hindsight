@@ -40,6 +40,10 @@ def getWind(combinedWeatherInfo):
     windForce = strings[-1]
     return windForce
 
+def getWind_direction(combinedWeatherInfo):
+    strings = combinedWeatherInfo.split(' ')
+    windDirection = strings[0]
+    return windDirection
 
 def loopThroughDays(weatherdata,prediction_in_days):
 
@@ -51,9 +55,9 @@ def loopThroughDays(weatherdata,prediction_in_days):
         prec_prob = getPrec_prob(weatheroftheday[3])
         rain = getRain(weatheroftheday[3])
         windForce = getWind(weatheroftheday[4])
+        windDirection = getWind_direction(weatheroftheday[4])
 
         addDB.add('prediction', date, T_max, T_min, prec_prob, rain, windForce,prediction_in_days)
-
         prediction_in_days = prediction_in_days + 1
 
 #Prediction for x days in advance
