@@ -57,7 +57,7 @@ def loopThroughDays(weatherdata,prediction_in_days):
         windForce = getWind(weatheroftheday[4])
         windDirection = getWind_direction(weatheroftheday[4])
 
-        addDB.add('prediction', date, T_max, T_min, prec_prob, rain, windForce,prediction_in_days)
+        addDB.add('prediction', date, T_max, T_min, prec_prob, rain, windForce, windDirection, prediction_in_days)
         prediction_in_days = prediction_in_days + 1
 
 #Prediction for x days in advance

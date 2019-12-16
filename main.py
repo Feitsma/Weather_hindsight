@@ -6,3 +6,4 @@ This file is run each day at 12:00 and
 
 
 import scrapeWeerPlaza
+import data_yesterday
