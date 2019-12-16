@@ -27,3 +27,5 @@ def meteric_to_Beaufort(wind_speed):
         Beaufort = 12
 
     return Beaufort
+
+def wind_direction_to_text(wind_direction):

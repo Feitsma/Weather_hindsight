@@ -1,6 +1,6 @@
 import knmi
 import pandas as pd
-import wind_Converter
+import converter_functions
 import datetime
 import addDB
 
@@ -14,7 +14,7 @@ min_temp = float(df['TN'].iloc[-1]/10) #min. temp tijdens laatste entry (moet gi
 max_temp = float(df['TX'].iloc[-1]/10) #max. temp
 rain = float(df['RH'].iloc[-1]/10) #rain
 wind_speed = df['FG'].iloc[-1]/10 #mean windspeed (m/s)
-Beaufort = wind_Converter.meteric_to_Beaufort(wind_speed)
+Beaufort = converter_functions.meteric_to_Beaufort(wind_speed)
 wind_direction = int(df['DDVEC'].iloc[-1]) #wind direction (360=north, 90=east, 180=south, 270=west, 0=calm/variable)
 
 #add to database
