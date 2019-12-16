@@ -28,4 +28,14 @@ def meteric_to_Beaufort(wind_speed):
 
     return Beaufort
 
+def closest_wind_direction(lst, K):
+    """Determines to which direction the given direction is closest"""
+    return lst[min(range(len(lst)), key = lambda i: abs(lst[i]-K))]
+
 def wind_direction_to_text(wind_direction):
+    """Converts wind direction in degrees to abbreviation in text, using lookup table and function closest_wind_direction"""
+    common_direcions = [0, 360, 22.5, 45, 67.5, 90, 112.5, 135, 157.5, 180, 202.5, 225, 247.5, 270, 292.5, 315, 337.5]
+    text_directions = {0:"Calm/variable", 360:"N", 22.5:"NNO", 45:"NO", 67.5:"ONO", 90:"O", 112.5:"OZO", 135:"ZO", 157.5:"ZZO", 180:"Z", 202.5:"ZZW", 225:"ZW", 247.5:"WZW", 270:"W", 292.5:"WNW", 315:"NW", 337.5:"NNW"}
+    closest_common_direction = closest_wind_direction(common_direcions, wind_direction)
+    direction = text_directions[closest_common_direction]
+    return direction

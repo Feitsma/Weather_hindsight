@@ -16,7 +16,7 @@ rain = float(df['RH'].iloc[-1]/10) #rain
 wind_speed = df['FG'].iloc[-1]/10 #mean windspeed (m/s)
 Beaufort = converter_functions.meteric_to_Beaufort(wind_speed)
 wind_direction = int(df['DDVEC'].iloc[-1]) #wind direction (360=north, 90=east, 180=south, 270=west, 0=calm/variable)
+direction_text = converter_functions.wind_direction_to_text(wind_direction)
 
 #add to database
-addDB.add_data_yesterday(yesterday, max_temp, min_temp, rain, Beaufort, wind_direction)
-
+addDB.add_data_yesterday(yesterday, max_temp, min_temp, rain, Beaufort, direction_text)
