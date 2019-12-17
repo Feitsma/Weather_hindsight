@@ -6,6 +6,7 @@ import addDB
 
 #Get the date of yesterday to retreive its information from KNMI
 yesterday = (datetime.datetime.now() - datetime.timedelta(days=1)).strftime('%Y%m%d')
+
 #Station 280 is Eelde
 df = knmi.get_day_data_dataframe(stations=[280], start=yesterday)
 variables = knmi.variables #handig als je wilt weten wat je allemaal kunt oproepen van KNMI
