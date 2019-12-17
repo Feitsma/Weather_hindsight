@@ -1,8 +1,8 @@
 import knmi
-import pandas as pd
 import converter_functions
 import datetime
 import addDB
+
 
 #Get the date of yesterday to retreive its information from KNMI
 yesterday = (datetime.datetime.now() - datetime.timedelta(days=1)).strftime('%Y%m%d')

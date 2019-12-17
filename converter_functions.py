@@ -1,3 +1,7 @@
+"""
+Conversion of wind speeds and directions to compare data of KNMI with WeerPlaza
+"""
+
 def meteric_to_Beaufort(wind_speed):
     if 0 <= wind_speed <= 0.2:
         Beaufort = 0

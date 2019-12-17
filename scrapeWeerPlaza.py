@@ -7,7 +7,6 @@ import pandas as pd
 import datetime
 import addDB
 
-weerplaza = pd.read_html('https://www.weerplaza.nl/nederland/eelde-paterswolde/8967/')
 
 def getDate(combinedWeatherInfo):
     strings = combinedWeatherInfo.split(' ')
@@ -59,6 +58,9 @@ def loopThroughDays(weatherdata,prediction_in_days):
 
         addDB.add('prediction', date, T_max, T_min, prec_prob, rain, windForce, windDirection, prediction_in_days)
         prediction_in_days = prediction_in_days + 1
+
+
+weerplaza = pd.read_html('https://www.weerplaza.nl/nederland/eelde-paterswolde/8967/')
 
 #Prediction for x days in advance
 prediction_in_days = 1
