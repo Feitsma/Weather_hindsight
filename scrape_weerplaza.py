@@ -11,7 +11,7 @@ import addDB
 def get_date(combined_weather_info):
     strings = combined_weather_info.split(' ')
     date = strings[-1] + '-' + str(datetime.datetime.now().year)
-    date = datetime.datetime.strptime(date, '%d-%m-%Y')
+    date = datetime.datetime.strptime(date, '%d-%m-%Y') # TODO fix end of year bug where for the first to weeks of jan the year is not correct.
     return date
 
 
@@ -19,7 +19,7 @@ def get_temps(combined_weather_info):
     strings = combined_weather_info.split(' ')
     t_max = strings[0]
     t_min = strings[2]
-    return t_max,t_min
+    return t_max, t_min
 
 def get_prec_prob(combined_weather_info):
     strings = combined_weather_info.split(' ')
