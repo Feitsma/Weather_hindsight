@@ -1,15 +1,15 @@
 import knmi
-import pandas as pd
 import converter_functions
 import datetime
 import addDB
 
+
 #Get the date of yesterday to retreive its information from KNMI
 yesterday = (datetime.datetime.now() - datetime.timedelta(days=1)).strftime('%Y%m%d')
+
 #Station 280 is Eelde
 df = knmi.get_day_data_dataframe(stations=[280], start=yesterday)
 variables = knmi.variables #handig als je wilt weten wat je allemaal kunt oproepen van KNMI
-print(variables)
 min_temp = float(df['TN'].iloc[-1]/10) #min. temp tijdens laatste entry (moet gisteren zijn)
 max_temp = float(df['TX'].iloc[-1]/10) #max. temp
 rain = float(df['RH'].iloc[-1]/10) #rain
