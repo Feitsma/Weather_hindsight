@@ -94,6 +94,7 @@ def plot_temp_outlook():
     plt.xlabel('Outlook in days')
     plt.ylabel('Temperature ($^\circ$C)')
     plt.savefig('/var/www/hp-iot/images/weather-hindsight/temp_outlook.png')
+    plt.close()
     return plt
 
 def plot_rain_outlook():
@@ -111,6 +112,7 @@ def plot_rain_outlook():
     plt.xlabel('Outlook in days')
     plt.ylabel('Precipitation (mm)')
     plt.savefig('/var/www/hp-iot/images/weather-hindsight/rain_outlook.png')
+    plt.close()
     return plt
 
 plot_temp_outlook()
