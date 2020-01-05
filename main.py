@@ -9,3 +9,7 @@ This file is run each day at 12:00 and
 
 import scrape_weerplaza
 import data_yesterday
+
+import data_processing
+import temp_quality_check
+import mm_quality_check

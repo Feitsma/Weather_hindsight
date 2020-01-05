@@ -1,6 +1,7 @@
 import pandas as pd
 import mysql.connector
 import dbsettings
+import matplotlib.pyplot as plt
 
 conn = mysql.connector.connect(user=dbsettings.user,
                                    password=dbsettings.password,
@@ -17,5 +18,7 @@ temps_prediction = pd.read_sql("""SELECT
                                   INNER JOIN t on prediction.prediction_for = t.date 
                                   GROUP BY prediction_in_days""", conn)
 
-temps_prediction.plot(x='prediction_in_days', y=['T_max_error', 'T_min_error'])
 
+plt.ioff()
+plot = temps_prediction.plot(x='prediction_in_days', y=['T_max_error', 'T_min_error']).get_figure()
+plot.savefig('/var/www/hp-iot/images/weather-hindsight/rain_outlook.png')

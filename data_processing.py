@@ -87,10 +87,13 @@ def plot_temp_outlook():
     min_temp_pred_plot = plt.plot(two_weeks, min_temps_14_days, '.C0-', label='min. temp. prediction')
     act_max_temp_plot = plt.plot(0,T_max_yesterday,'ro', label='Actual max. T')
     act_min_temp_plot = plt.plot(0,T_min_yesterday,'b*', label='Actual min. T')
+
+    plt.ioff() # Disable showing of plots
     plt.legend()
     plt.title('Temperature Outlook for ' + str(date_yesterday))
     plt.xlabel('Outlook in days')
     plt.ylabel('Temperature ($^\circ$C)')
+    plt.savefig('/var/www/hp-iot/images/weather-hindsight/temp_outlook.png')
     return plt
 
 def plot_rain_outlook():
@@ -101,13 +104,16 @@ def plot_rain_outlook():
     two_weeks = np.arange(start=-14, stop=0, step=1)
     mm_pred_plot = plt.plot(two_weeks, mm_14_days, '.C1-', label='precipitation outlook')
     act_mm_plot = plt.plot(0,mm_yesterday,'ro', label='Actual precipitation')
+
+    plt.ioff()  # Disable showing of plots
     plt.legend()
     plt.title('Precipitation Outlook for ' + str(date_yesterday))
     plt.xlabel('Outlook in days')
     plt.ylabel('Precipitation (mm)')
+    plt.savefig('/var/www/hp-iot/images/weather-hindsight/rain_outlook.png')
     return plt
 
-#plot_temp_outlook()
+plot_temp_outlook()
 plot_rain_outlook()
 print(yesterday_rain())
 print(rain_prediction())
