@@ -61,10 +61,21 @@ def yesterdays_temps():
     return T_max_yesterday, T_min_yesterday
 
 def yesterday_rain():
+    #get mm of rain yesterday
+    mm_yesterday = records_t[-1][4]
+    return mm_yesterday
 
+def rain_prediction():
+    #create and array of predicted amount of rain of yesterday
+    date_yesterday = records_t[-1][1]
+    mm_14_days = []
+    for entry in records:
+        if entry[1] == date_yesterday:
+            mm_14_days = np.append(mm_14_days, float(entry[4]))
+    return mm_14_days
 
 def plot_temp_outlook():
-    #create 14 day range for plot (t-14 to t-1)
+    #create 14 day plot with temperature outlook for day of yesterday
     max_temps_14_days = max_temp_prediction()
     min_temps_14_days = min_temp_prediction()
     temps_yesterday = yesterdays_temps()
@@ -82,4 +93,21 @@ def plot_temp_outlook():
     plt.ylabel('Temperature ($^\circ$C)')
     return plt
 
-plot_temp_outlook()
+def plot_rain_outlook():
+    #create 14 day plot with amount of rain outlook for day of yesterday
+    mm_yesterday = yesterday_rain()
+    mm_14_days = rain_prediction()
+    date_yesterday = records_t[-1][1]
+    two_weeks = np.arange(start=-14, stop=0, step=1)
+    mm_pred_plot = plt.plot(two_weeks, mm_14_days, '.C1-', label='precipitation outlook')
+    act_mm_plot = plt.plot(0,mm_yesterday,'ro', label='Actual precipitation')
+    plt.legend()
+    plt.title('Precipitation Outlook for ' + str(date_yesterday))
+    plt.xlabel('Outlook in days')
+    plt.ylabel('Precipitation (mm)')
+    return plt
+
+#plot_temp_outlook()
+plot_rain_outlook()
+print(yesterday_rain())
+print(rain_prediction())
