@@ -43,5 +43,17 @@ def max_temp_prediction():
             max_temps_14_days = np.append(max_temps_14_days, int(entry[2]))
     return max_temps_14_days
 
+def min_temp_prediction():
+    #This function creates an array of predicted max temperatures for the date of yesterday
+    date_yesterday = records_t[-1][1]
+    min_temps_14_days = []
+    for entry in records:
+        if entry[1] == date_yesterday:
+            min_temps_14_days = np.append(min_temps_14_days, int(entry[3]))
+    return min_temps_14_days
+
 max_temps_14_days = max_temp_prediction()
-plt.plot([1,2,3,4,5,6,7,8,9,10,11,12,13,14], max_temps_14_days)
+min_temps_14_days = min_temp_prediction()
+
+two_weeks = np.arange(start=1, stop=15, step=1)
+plt.plot(two_weeks, max_temps_14_days, two_weeks, min_temps_14_days)
