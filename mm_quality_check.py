@@ -18,4 +18,4 @@ temps_prediction = pd.read_sql("""SELECT
 
 plt.ioff()
 plot = temps_prediction.plot(x='prediction_in_days', y='mm_error')
-plot.savefig('/var/www/hp-iot/images/weather-hindsight/rain_outlook.png')
+plot.savefig('/var/www/hp-iot/images/weather-hindsight/rain_average_outlook.png')
