@@ -129,17 +129,17 @@ def plot_rain_outlook():
     return plt
 
 def plot_wind_outlook():
-    #create 14 day plot with temperature outlook for day of yesterday
+    #create 14 day plot with wind force outlook for day of yesterday
     wind_14_days = wind_prediction()
     date_yesterday = records_t[-1][1]
     two_weeks = np.arange(start=-14, stop=0, step=1)
     wind_yesterday = yesterday_wind()
-    wind_pred_plot = plt.plot(two_weeks, wind_14_days, '.C0-', label='wind prediction')
+    wind_pred_plot = plt.plot(two_weeks, wind_14_days, '.C0-', label='wind force prediction')
     act_wind_plot = plt.plot(0,wind_yesterday,'bo', label='Actual wind')
 
     #plt.ioff() # Disable showing of plots
     plt.legend()
-    plt.title('Wind Outlook for ' + str(date_yesterday))
+    plt.title('Wind force Outlook for ' + str(date_yesterday))
     plt.xlabel('Outlook in days')
     plt.ylabel('Wind (Beaufort)')
     plt.savefig('/var/www/hp-iot/images/weather-hindsight/wind_outlook.png')
@@ -147,7 +147,7 @@ def plot_wind_outlook():
     return plt
 
 #plot_temp_outlook()
-plot_rain_outlook()
+#plot_rain_outlook()
 #plot_wind_outlook()
-print(yesterday_rain())
-print(rain_prediction())
+#print(yesterday_rain())
+#print(rain_prediction())
