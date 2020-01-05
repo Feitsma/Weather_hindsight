@@ -4,6 +4,8 @@ from mysql.connector import Error
 import numpy as np
 import datetime
 import matplotlib.pyplot as plt
+import matplotlib.pyplot as point
+
 
 
 try:
@@ -52,8 +54,32 @@ def min_temp_prediction():
             min_temps_14_days = np.append(min_temps_14_days, int(entry[3]))
     return min_temps_14_days
 
-max_temps_14_days = max_temp_prediction()
-min_temps_14_days = min_temp_prediction()
+def yesterdays_temps():
+    #This function gets temps of yesterday
+    T_max_yesterday = records_t[-1][2]
+    T_min_yesterday = records_t[-1][3]
+    return T_max_yesterday, T_min_yesterday
 
-two_weeks = np.arange(start=1, stop=15, step=1)
-plt.plot(two_weeks, max_temps_14_days, two_weeks, min_temps_14_days)
+def yesterday_rain():
+
+
+def plot_temp_outlook():
+    #create 14 day range for plot (t-14 to t-1)
+    max_temps_14_days = max_temp_prediction()
+    min_temps_14_days = min_temp_prediction()
+    temps_yesterday = yesterdays_temps()
+    T_max_yesterday = temps_yesterday[0]
+    T_min_yesterday = temps_yesterday[1]
+    date_yesterday = records_t[-1][1]
+    two_weeks = np.arange(start=-14, stop=0, step=1)
+    max_temp_pred_plot = plt.plot(two_weeks, max_temps_14_days, '.C1-', label='max. temp. prediction')
+    min_temp_pred_plot = plt.plot(two_weeks, min_temps_14_days, '.C0-', label='min. temp. prediction')
+    act_max_temp_plot = plt.plot(0,T_max_yesterday,'ro', label='Actual max. T')
+    act_min_temp_plot = plt.plot(0,T_min_yesterday,'b*', label='Actual min. T')
+    plt.legend()
+    plt.title('Temperature Outlook for ' + str(date_yesterday))
+    plt.xlabel('Outlook in days')
+    plt.ylabel('Temperature ($^\circ$C)')
+    return plt
+
+plot_temp_outlook()
