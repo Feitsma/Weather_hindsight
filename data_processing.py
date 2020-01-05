@@ -146,8 +146,8 @@ def plot_wind_outlook():
     plt.close()
     return plt
 
-#plot_temp_outlook()
-#plot_rain_outlook()
-#plot_wind_outlook()
+plot_temp_outlook()
+plot_rain_outlook()
+plot_wind_outlook()
 #print(yesterday_rain())
 #print(rain_prediction())
