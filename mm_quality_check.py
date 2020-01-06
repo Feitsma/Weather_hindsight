@@ -17,9 +17,9 @@ temps_prediction = pd.read_sql("""SELECT
                                   GROUP BY prediction_in_days""", conn)
 
 plt.ioff()
-plot = temps_prediction.plot(x='prediction_in_days', y='mm_error', title='Precipitation outlook')
+plot = temps_prediction.plot(x='prediction_in_days', y='mm_error', title='Average error in precipitation outlook')
 plot.set_xlabel('Outlook in days')
-plot.set_ylabel('Precipitation in mm')
+plot.set_ylabel('Precipitation (mm)')
 plot = plot.get_figure()
 plot.savefig('/var/www/hp-iot/images/weather-hindsight/rain_average_outlook.png')
 
