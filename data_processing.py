@@ -65,14 +65,27 @@ def yesterday_rain():
     mm_yesterday = records_t[-1][4]
     return mm_yesterday
 
+def yesterday_wind():
+    wind_yesterday = records_t[-1][5]
+    return wind_yesterday
+
 def rain_prediction():
     #create and array of predicted amount of rain of yesterday
     date_yesterday = records_t[-1][1]
     mm_14_days = []
     for entry in records:
         if entry[1] == date_yesterday:
-            mm_14_days = np.append(mm_14_days, float(entry[4]))
+            mm_14_days = np.append(mm_14_days, float(entry[5]))
     return mm_14_days
+
+def wind_prediction():
+    #create and array of predicted amount of wind of yesterday
+    date_yesterday = records_t[-1][1]
+    wind_14_days = []
+    for entry in records:
+        if entry[1] == date_yesterday:
+            wind_14_days = np.append(wind_14_days, int(entry[6]))
+    return wind_14_days
 
 def plot_temp_outlook():
     #create 14 day plot with temperature outlook for day of yesterday
@@ -88,7 +101,7 @@ def plot_temp_outlook():
     act_max_temp_plot = plt.plot(0,T_max_yesterday,'ro', label='Actual max. T')
     act_min_temp_plot = plt.plot(0,T_min_yesterday,'b*', label='Actual min. T')
 
-    plt.ioff() # Disable showing of plots
+    #plt.ioff() # Disable showing of plots
     plt.legend()
     plt.title('Temperature Outlook for ' + str(date_yesterday))
     plt.xlabel('Outlook in days')
@@ -106,7 +119,7 @@ def plot_rain_outlook():
     mm_pred_plot = plt.plot(two_weeks, mm_14_days, '.C1-', label='precipitation outlook')
     act_mm_plot = plt.plot(0,mm_yesterday,'ro', label='Actual precipitation')
 
-    plt.ioff()  # Disable showing of plots
+    #plt.ioff()  # Disable showing of plots
     plt.legend()
     plt.title('Precipitation Outlook for ' + str(date_yesterday))
     plt.xlabel('Outlook in days')
@@ -115,7 +128,26 @@ def plot_rain_outlook():
     plt.close()
     return plt
 
+def plot_wind_outlook():
+    #create 14 day plot with wind force outlook for day of yesterday
+    wind_14_days = wind_prediction()
+    date_yesterday = records_t[-1][1]
+    two_weeks = np.arange(start=-14, stop=0, step=1)
+    wind_yesterday = yesterday_wind()
+    wind_pred_plot = plt.plot(two_weeks, wind_14_days, '.C0-', label='wind force prediction')
+    act_wind_plot = plt.plot(0,wind_yesterday,'bo', label='Actual wind')
+
+    #plt.ioff() # Disable showing of plots
+    plt.legend()
+    plt.title('Wind force Outlook for ' + str(date_yesterday))
+    plt.xlabel('Outlook in days')
+    plt.ylabel('Wind (Beaufort)')
+    plt.savefig('/var/www/hp-iot/images/weather-hindsight/wind_outlook.png')
+    plt.close()
+    return plt
+
 plot_temp_outlook()
 plot_rain_outlook()
-print(yesterday_rain())
-print(rain_prediction())
+plot_wind_outlook()
+#print(yesterday_rain())
+#print(rain_prediction())
