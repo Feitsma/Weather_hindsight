@@ -20,5 +20,8 @@ temps_prediction = pd.read_sql("""SELECT
 
 
 plt.ioff()
-plot = temps_prediction.plot(x='prediction_in_days', y=['T_max_error', 'T_min_error']).get_figure()
+plot = temps_prediction.plot(x='prediction_in_days', y=['T_max_error', 'T_min_error'], title='Average error in temperature outlook')
+plot.set_xlabel('Outlook in days')
+plot.set_ylabel('Temperature ($^\circ$C)')
+plot = plot.get_figure()
 plot.savefig('/var/www/hp-iot/images/weather-hindsight/temp_average_outlook.png')
