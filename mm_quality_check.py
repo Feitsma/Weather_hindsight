@@ -22,3 +22,4 @@ plot.set_xlabel('Outlook in days')
 plot.set_ylabel('Precipitation in mm')
 plot = plot.get_figure()
 plot.savefig('/var/www/hp-iot/images/weather-hindsight/rain_average_outlook.png')
+
