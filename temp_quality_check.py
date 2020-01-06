@@ -12,7 +12,7 @@ conn = mysql.connector.connect(user=dbsettings.user,
 temps_prediction = pd.read_sql("""SELECT 
                                     AVG((ABS(prediction.T_max - t.T_max))) AS T_max_error, 
                                     AVG((ABS(prediction.T_min - t.T_min))) AS T_min_error, 
-                                    prediction_in_days
+                                    (prediction_in_days * -1) AS prediction_in_days
                                           
                                   FROM prediction 
                                   INNER JOIN t on prediction.prediction_for = t.date 
