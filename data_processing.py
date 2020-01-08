@@ -13,13 +13,13 @@ try:
                                          password=dbsettings.password,
                                          database=dbsettings.database,
                                          host=dbsettings.host)
-    #import data from prediction database
+    #import all (*) data from database 'prediction'
     sql_select_Query = "select * from prediction"
     cursor = connection.cursor()
     cursor.execute(sql_select_Query)
     records = cursor.fetchall()
 
-    #import data from t database
+    #import all (*) data from table 't'
     sql_select_Query_t = "select * from t"
     cursor_t = connection.cursor()
     cursor_t.execute(sql_select_Query_t)
@@ -38,19 +38,19 @@ finally:
 
 def max_temp_prediction():
     #This function creates an array of predicted max temperatures for the date of yesterday
-    date_yesterday = records_t[-1][1]
+    date_yesterday = records_t[-1][1] #get most recent entry (row), column 1
     max_temps_14_days = []
     for entry in records:
-        if entry[1] == date_yesterday:
+        if entry[1] == date_yesterday: #if a row contains the date of yesterday, get value from column 2, which is maxT.
             max_temps_14_days = np.append(max_temps_14_days, int(entry[2]))
     return max_temps_14_days
 
 def min_temp_prediction():
     #This function creates an array of predicted max temperatures for the date of yesterday
-    date_yesterday = records_t[-1][1]
+    date_yesterday = records_t[-1][1] #get most recent entry (row), column 1
     min_temps_14_days = []
     for entry in records:
-        if entry[1] == date_yesterday:
+        if entry[1] == date_yesterday: #if a row contains the date of yesterday, get value from column 2, which is maxT.
             min_temps_14_days = np.append(min_temps_14_days, int(entry[3]))
     return min_temps_14_days
 
@@ -66,6 +66,7 @@ def yesterday_rain():
     return mm_yesterday
 
 def yesterday_wind():
+    #get wind force of yesterday
     wind_yesterday = records_t[-1][5]
     return wind_yesterday
 
@@ -95,7 +96,7 @@ def plot_temp_outlook():
     T_max_yesterday = temps_yesterday[0]
     T_min_yesterday = temps_yesterday[1]
     date_yesterday = records_t[-1][1]
-    two_weeks = np.arange(start=-14, stop=0, step=1)
+    two_weeks = np.arange(start=-14, stop=0, step=1) #initiate x axis as time, from -14 to 0 (yesterday)
     max_temp_pred_plot = plt.plot(two_weeks, max_temps_14_days, '.C1-', label='max. temp. prediction')
     min_temp_pred_plot = plt.plot(two_weeks, min_temps_14_days, '.C0-', label='min. temp. prediction')
     act_max_temp_plot = plt.plot(0,T_max_yesterday,'ro', label='Actual max. T')
@@ -103,12 +104,12 @@ def plot_temp_outlook():
 
     #plt.ioff() # Disable showing of plots
     plt.legend()
-    plt.title('Temperature Outlook for ' + str(date_yesterday))
+    plt.title('Temperature Outlook for ' + str(date_yesterday)) #add title with date as variable in name
     plt.xlabel('Outlook in days')
     plt.ylabel('Temperature ($^\circ$C)')
-    plt.savefig('/var/www/hp-iot/images/weather-hindsight/temp_outlook.png')
+    plt.savefig('/var/www/hp-iot/images/weather-hindsight/temp_outlook.png') #save img on webpage-callable location
     plt.close()
-    return plt
+    return plt #return the plot
 
 def plot_rain_outlook():
     #create 14 day plot with amount of rain outlook for day of yesterday
@@ -121,7 +122,7 @@ def plot_rain_outlook():
 
     #plt.ioff()  # Disable showing of plots
     plt.legend()
-    plt.title('Precipitation Outlook for ' + str(date_yesterday))
+    plt.title('Precipitation Outlook for ' + str(date_yesterday)) #add title with date as variable in name
     plt.xlabel('Outlook in days')
     plt.ylabel('Precipitation (mm)')
     plt.savefig('/var/www/hp-iot/images/weather-hindsight/rain_outlook.png')
@@ -146,6 +147,7 @@ def plot_wind_outlook():
     plt.close()
     return plt
 
+#only run three functions, inside these functions, the others are requested.
 plot_temp_outlook()
 plot_rain_outlook()
 plot_wind_outlook()
