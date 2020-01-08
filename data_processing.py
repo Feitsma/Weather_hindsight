@@ -1,12 +1,9 @@
 import mysql.connector
 import dbsettings
 from mysql.connector import Error
+import pandas as pd
 import numpy as np
-import datetime
 import matplotlib.pyplot as plt
-import matplotlib.pyplot as point
-
-
 
 try:
     connection = mysql.connector.connect(user=dbsettings.user,
@@ -175,7 +172,7 @@ def plot_average_temp_error():
     plot.savefig('/var/www/hp-iot/images/weather-hindsight/temp_average_outlook.png')
 
 
-def plot_average_mm_error()
+def plot_average_mm_error():
     """Plots the average total error vs days of prediction, and saves the plot on webserver"""
 
     conn = mysql.connector.connect(user=dbsettings.user,
